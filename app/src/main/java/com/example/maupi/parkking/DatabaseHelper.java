@@ -251,6 +251,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public String getAddress(String meterId){
+        db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
+        String ID , address = "";
+        Cursor c = db.rawQuery(query , null);
+        if(c.moveToFirst()) {
+            do {
+                ID = c.getString(c.getColumnIndex(COLUMN_METER_ID));
+                if (ID.equals(meterId)) {
+                    String priceFromDb = "SELECT " + COLUMN_METER_ADDRESS +
+                            " FROM " + TABLE_METER +
+                            " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
+                    Cursor cursor = db.rawQuery(priceFromDb, null);
+                    cursor.moveToFirst();
+                    address = cursor.getString(cursor.getColumnIndex(COLUMN_METER_ADDRESS));
+                }
+            } while (c.moveToNext());
+        }
+        return address;
+    }
+
     public String getPrice(String meterId){
         db = this.getReadableDatabase();
         String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
@@ -260,7 +281,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 ID = c.getString(c.getColumnIndex(COLUMN_METER_ID));
                 if (ID.equals(meterId)) {
-                    String priceFromDb = "SELECT " + COLUMN_METER_PRICE + " FROM " + TABLE_METER + " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
+                    String priceFromDb = "SELECT " + COLUMN_METER_PRICE +
+                            " FROM " + TABLE_METER +
+                            " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
                     Cursor cursor = db.rawQuery(priceFromDb, null);
                     cursor.moveToFirst();
                     price = cursor.getString(cursor.getColumnIndex(COLUMN_METER_PRICE));
@@ -268,6 +291,78 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (c.moveToNext());
         }
         return price;
+    }
+
+    public String getTimePerUse(String meterId){
+        db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
+        String ID , timePerUse = "";
+        Cursor c = db.rawQuery(query , null);
+        if(c.moveToFirst()) {
+            do {
+                ID = c.getString(c.getColumnIndex(COLUMN_METER_ID));
+                if (ID.equals(meterId)) {
+                    String priceFromDb = "SELECT " + COLUMN_TIME_PER_USE +
+                            " FROM " + TABLE_METER +
+                            " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
+                    Cursor cursor = db.rawQuery(priceFromDb, null);
+                    cursor.moveToFirst();
+                    timePerUse = cursor.getString(cursor.getColumnIndex(COLUMN_TIME_PER_USE));
+                }
+            } while (c.moveToNext());
+        }
+        return timePerUse;
+    }
+
+    /* TODO make this work
+    public String getAvailability(String meterId){
+        db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
+        String ID , availability = "";
+        Cursor c = db.rawQuery(query , null);
+        if(c.moveToFirst()) {
+            do {
+                ID = c.getString(c.getColumnIndex(COLUMN_METER_ID));
+                if (ID.equals(meterId)) {
+                    String priceFromDb = "SELECT " + COLUMN_ +
+                            " FROM " + TABLE_METER +
+                            " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
+                    Cursor cursor = db.rawQuery(priceFromDb, null);
+                    cursor.moveToFirst();
+                    availability = cursor.getString(cursor.getColumnIndex(COLUMN_METER_PRICE));
+                }
+            } while (c.moveToNext());
+        }
+        return availability;
+    }
+    */
+
+    /* TODO Make this work
+    public String getTimeUntilAvailable(String meterId){
+        db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
+        String ID , price = "";
+        Cursor c = db.rawQuery(query , null);
+        if(c.moveToFirst()) {
+            do {
+                ID = c.getString(c.getColumnIndex(COLUMN_METER_ID));
+                if (ID.equals(meterId)) {
+                    String priceFromDb = "SELECT " + COLUMN_METER_PRICE +
+                            " FROM " + TABLE_METER +
+                            " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
+                    Cursor cursor = db.rawQuery(priceFromDb, null);
+                    cursor.moveToFirst();
+                    price = cursor.getString(cursor.getColumnIndex(COLUMN_METER_PRICE));
+                }
+            } while (c.moveToNext());
+        }
+        return price;
+    }
+    */
+
+    //TODO make this update the time last used, only if the time slot is available
+    public void reserveTimeSlot(int timeOfUse, int lengthOfUse){
+
     }
 
     @Override
