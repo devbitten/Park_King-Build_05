@@ -16,6 +16,8 @@ public class MeterActivity extends AppCompatActivity {
     TextView timeLastUsedTV;
     TextView timePerLastUseTV;
 
+    String timeLastUsed;
+    String timePerLastUsed; //TODO change to int
     DatabaseHelper db = new DatabaseHelper(this);
 
     @Override
@@ -44,15 +46,20 @@ public class MeterActivity extends AppCompatActivity {
 
         Log.d("FROM DB", db.getAddress("" + meterID));
         Log.d("FROM DB", db.getPrice("" + meterID));
+        timeLastUsed = db.getTimeLastUsed("" + meterID);
+        timePerLastUsed = db.getTimePerOfLastUse("" + meterID);
         //Displays the values from the database
         addressTV.setText(db.getAddress("" + meterID));
         idTV.setText(Integer.toString(meterID));
         priceTV.setText(db.getPrice("" + meterID));
         timePerUseTV.setText(db.getTimePerUse("" + meterID));
         currentAvailabilityTV.setText(db.getPrice("" + meterID));
-        timeUntilAvailableTV.setText(db.getPrice("" + meterID));
+        timeUntilAvailableTV.setText(""/*Add function to display time until available*/);
         timeLastUsedTV.setText(db.getTimeLastUsed("" + meterID));
         timePerLastUseTV.setText(db.getTimePerOfLastUse("" + meterID));
 
     }
+
+    public String getTimeTilAvailbleDisplay()
+
 }
