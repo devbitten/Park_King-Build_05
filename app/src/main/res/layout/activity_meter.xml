@@ -31,11 +31,27 @@
                 android:text="Address: "
                 />
             <TextView
+            android:id="@+id/address_label_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+                android:layout_toRightOf="@+id/address_label"
+            android:text="FILL IN WITH ADDRESS"
+            />
+            <TextView
                 android:id="@+id/id_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="ID: "
+                />
+            <TextView
+                android:id="@+id/id_label_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_toRightOf="@+id/id_label"
+                android:text="FILL IN WITH ID"
                 />
             <TextView
                 android:id="@+id/price_label"
@@ -45,11 +61,27 @@
                 android:text="Price: "
                 />
             <TextView
+                android:id="@+id/price_label_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_toRightOf="@+id/price_label"
+                android:text="FILL IN WITH PRICE"
+                />
+            <TextView
                 android:id="@+id/time_per_use_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="Time Per Use (In Minutes): "
+                />
+            <TextView
+                android:id="@+id/time_per_use_label_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_toRightOf="@+id/time_per_use_label"
+                android:text="FILL IN WITH TIME PER USE"
                 />
             <TextView
                 android:id="@+id/availability_label"
@@ -59,11 +91,57 @@
                 android:text="Current Availability: "
                 />
             <TextView
+                android:id="@+id/availability_label_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_toRightOf="@+id/availability_label"
+                android:text="FILL IN WITH AVAILABILITY"
+                />
+            <TextView
                 android:id="@+id/time_til_available_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="Time Until Available: "
+                />
+            <TextView
+                android:id="@+id/time_til_available_label_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_toRightOf="@+id/time_til_available_label"
+                android:text="FILL IN WITH TIME TIL AVAILABLE"
+                />
+            <TextView
+                android:id="@+id/time_last_reserved_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Time ULast Reserved: "
+                />
+            <TextView
+                android:id="@+id/time_last_reserved_label_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_toRightOf="@+id/time_til_available_label"
+                android:text="FILL IN WITH TIME LAST RESERVED"
+                />
+            <TextView
+                android:id="@+id/time_per_last_use_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Time Per of Last Use: "
+                />
+            <TextView
+                android:id="@+id/time_per_last_use_label_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_toRightOf="@+id/time_per_last_use_label"
+                android:text="FILL IN WITH TIME PER LAST USE"
                 />
         </LinearLayout>
     </ScrollView>

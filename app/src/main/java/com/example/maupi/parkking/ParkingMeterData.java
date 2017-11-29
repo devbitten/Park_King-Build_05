@@ -28,13 +28,15 @@ public class ParkingMeterData implements Parcelable {
     private int timePerUse;     //Time, in minutes, the meter is used for
     private LatLng latlng;      //Latitude, and Longitude of meter
     private String address;     //Gives the address in the format "LINE_1\nZIP\nCITY\nSTATE"
+    private String timeLastUsed;    //When the meter was last reserved
+    private int timePerLastUsed;    //How long the meter was last used for
 
     public ParkingMeterData(){
 
     }
 
     public ParkingMeterData(Parcel in){
-        String[] data = new String[8];
+        String[] data = new String[10];
         in.readStringArray(data);
 
         this.id = Integer.parseInt(data[0]);
@@ -44,6 +46,8 @@ public class ParkingMeterData implements Parcelable {
         this.timePerUse = Integer.parseInt(data[4]);
         this.latlng = new LatLng(Double.parseDouble(data[5]), Double.parseDouble(data[6]));
         this.address = data[7];
+        this.timeLastUsed = data[8];
+        this.timePerLastUsed = Integer.parseInt(data[9]);
     }
 
     public static final Creator<ParkingMeterData> CREATOR = new Creator<ParkingMeterData>() {
@@ -114,6 +118,14 @@ public class ParkingMeterData implements Parcelable {
         this.latlng = latlng;
     }
 
+    public String getTimeLastUsed() {   return timeLastUsed;    }
+
+    public void setTimeLastUsed(String timeLastUsed) {  this.timeLastUsed = timeLastUsed;   }
+
+    public String getTimePerLastUsed() {   return Integer.toString(timePerLastUsed); }
+
+    public void setTimePerLastUsed(int timePerLastUsed) {   this.timePerLastUsed = timePerLastUsed; }
+
     @Override
     public int describeContents() {
         return 0;
@@ -129,6 +141,8 @@ public class ParkingMeterData implements Parcelable {
                         Integer.toString(this.timePerUse),
                         Double.toString(this.latlng.latitude),
                         Double.toString(this.latlng.longitude),
-                        this.address});
+                        this.address,
+                        this.timeLastUsed,
+                        Integer.toString(this.timePerLastUsed)});
     }
 }

@@ -222,6 +222,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_LONGITUDE = "longitude";
     private static final String COLUMN_METER_ADDRESS = "address";
     private static final String COLUMN_TIME_PER_USE = "usagetime";
+    private static final String COLUMN_TIME_LAST_USED = "lastuse";
+    private static final String COLUMN_TIME_PER_OF_LAST_USE = "timeperoflastuse";
+
     private static final String COLUMN_FOREIGNKEY_CLIENT = "client";
 
     private static final String CREATE_TABLE_METER = "CREATE TABLE " + TABLE_METER + "(" +
@@ -232,6 +235,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             COLUMN_LONGITUDE + " VARCHAR(100) NOT NULL, " +
             COLUMN_METER_PRICE + " VARCHAR(10) NOT NULL, " +
             COLUMN_TIME_PER_USE + " VARCHAR(50) NOT NULL, " +
+            COLUMN_TIME_LAST_USED + " VARCHAR(25) NOT NULL, " +
+            COLUMN_TIME_PER_OF_LAST_USE + " VARCHAR(10) NOT NULL, " +
             "FOREIGN KEY " + "(" + COLUMN_FOREIGNKEY_CLIENT + ") REFERENCES " + TABLE_CLIENT + "(" + COLUMN_ID + ") );";
 
     // Inserting a new payment in the meter table
@@ -245,6 +250,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_LONGITUDE , m.getLatlng().longitude);
         values.put(COLUMN_METER_PRICE , m.getPrice());
         values.put(COLUMN_TIME_PER_USE , m.getTimePerUse());
+        values.put(COLUMN_TIME_LAST_USED , m.getTimeLastUsed());
+        values.put(COLUMN_TIME_PER_OF_LAST_USE , m.getTimePerLastUsed());
         values.put(COLUMN_CLIENT , getForeignInfo());
 
         db.insert(TABLE_METER , null , values);
@@ -314,17 +321,61 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return timePerUse;
     }
 
-    /* TODO make this work
-    public String getAvailability(String meterId){
+
+    public String getTimeLastUsed(String meterId){
+        db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
+        String ID , timeLastUsed = "";
+        Cursor c = db.rawQuery(query , null);
+        if(c.moveToFirst()) {
+            do {
+                ID = c.getString(c.getColumnIndex(COLUMN_METER_ID));
+                if (ID.equals(meterId)) {
+                    String priceFromDb = "SELECT " + COLUMN_TIME_LAST_USED +
+                            " FROM " + TABLE_METER +
+                            " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
+                    Cursor cursor = db.rawQuery(priceFromDb, null);
+                    cursor.moveToFirst();
+                    timeLastUsed = cursor.getString(cursor.getColumnIndex(COLUMN_TIME_LAST_USED));
+                }
+            } while (c.moveToNext());
+        }
+        return timeLastUsed;
+    }
+
+
+    public String getTimePerOfLastUse(String meterId){
+        db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
+        String ID , timePerLastUse = "";
+        Cursor c = db.rawQuery(query , null);
+        if(c.moveToFirst()) {
+            do {
+                ID = c.getString(c.getColumnIndex(COLUMN_METER_ID));
+                if (ID.equals(meterId)) {
+                    String priceFromDb = "SELECT " + COLUMN_TIME_PER_OF_LAST_USE +
+                            " FROM " + TABLE_METER +
+                            " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
+                    Cursor cursor = db.rawQuery(priceFromDb, null);
+                    cursor.moveToFirst();
+                    timePerLastUse = cursor.getString(cursor.getColumnIndex(COLUMN_TIME_PER_OF_LAST_USE));
+                }
+            } while (c.moveToNext());
+        }
+        return timePerLastUse;
+    }
+
+    // TODO, amke this return true if the meter is available
+    public boolean getAvailability(String meterId){
         db = this.getReadableDatabase();
         String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
         String ID , availability = "";
         Cursor c = db.rawQuery(query , null);
         if(c.moveToFirst()) {
             do {
-                ID = c.getString(c.getColumnIndex(COLUMN_METER_ID));
+                ID = c.getString(c.getColumnIndex(COLUMN_METER_PRICE));
                 if (ID.equals(meterId)) {
-                    String priceFromDb = "SELECT " + COLUMN_ +
+                    String priceFromDb = "SELECT " + COLUMN_TIME_PER_USE +
                             " FROM " + TABLE_METER +
                             " WHERE " + COLUMN_METER_ID + " = '" + meterId + "';";
                     Cursor cursor = db.rawQuery(priceFromDb, null);
@@ -333,12 +384,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             } while (c.moveToNext());
         }
-        return availability;
+        return true;
     }
-    */
 
     /* TODO Make this work
-    public String getTimeUntilAvailable(String meterId){
+    public String reserveMeter(String meterId){
         db = this.getReadableDatabase();
         String query = "SELECT " + COLUMN_METER_ID + " FROM " + TABLE_METER;
         String ID , price = "";
