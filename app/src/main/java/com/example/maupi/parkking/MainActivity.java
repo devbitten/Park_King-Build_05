@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button AccBtn;
     private Button Login;
-    private Button MapBtn;
+   // private Button MapBtn;
     DatabaseHelper helper = new DatabaseHelper(this);
 
     @Override
@@ -43,16 +43,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MapBtn = (Button) findViewById(R.id.MapBtn);
+      //  MapBtn = (Button) findViewById(R.id.MapBtn);
 
-        MapBtn.setOnClickListener(new View.OnClickListener()
+        /*MapBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
                 goToMap();
             }
-        });
+        });*/
 
     }
     public void goToMap()
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             Toast success =  Toast.makeText(MainActivity.this, "congratulations, logged in successfully", Toast.LENGTH_SHORT);
             success.show();
             helper.userName = userName;
-            getPaymentInfo();
+            goToMap();
         } else{
             Toast failure =  Toast.makeText(MainActivity.this, "Sorry, wrong username or password", Toast.LENGTH_SHORT);
             failure.show();
@@ -93,10 +93,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void getPaymentInfo(){
+  /*  public void getPaymentInfo(){
         Intent intent = new Intent(this, getPaymentInfo.class);
         startActivity(intent);
-    }
+    }*/
 
 
 

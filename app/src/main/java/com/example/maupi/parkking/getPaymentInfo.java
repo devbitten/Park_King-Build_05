@@ -1,5 +1,6 @@
 package com.example.maupi.parkking;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,11 @@ public class getPaymentInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_payment_info);
 
+    }
+    public void goToMap()
+    {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 
     public void onSubmit(View v){
@@ -77,7 +83,7 @@ public class getPaymentInfo extends AppCompatActivity {
                 helper.insertPayment(p);
                 Toast c = Toast.makeText(getPaymentInfo.this, "payment info accepted", Toast.LENGTH_SHORT);
                 c.show();
-
+                goToMap();
             } else{
 
                 Toast unique =  Toast.makeText(getPaymentInfo.this, "Payment already exists", Toast.LENGTH_SHORT);

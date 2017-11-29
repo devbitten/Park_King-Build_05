@@ -29,6 +29,10 @@ public class CreateAccount extends AppCompatActivity {
             }
         });
     }
+    public void getPaymentInfo(){
+        Intent intent = new Intent(this, getPaymentInfo.class);
+        startActivity(intent);
+    }
 
     // Functions that needs to be called after the user submits his new account information
 
@@ -77,6 +81,7 @@ public class CreateAccount extends AppCompatActivity {
                     helper.insertContact(c);
                     Toast pass = Toast.makeText(CreateAccount.this, "congratulations, successfully created the new account", Toast.LENGTH_SHORT);
                     pass.show();
+                    getPaymentInfo();
                 } else{
 
                     Toast unique =  Toast.makeText(CreateAccount.this, "Username already exists", Toast.LENGTH_SHORT);

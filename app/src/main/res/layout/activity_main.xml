@@ -36,12 +36,7 @@
             android:layout_height="wrap_content"
             android:hint="Create Account"
             android:onClick="goToCreatAccount"/>
-        <Button
-            android:id="@+id/MapBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cheat to map"
-            android:onClick="goToMap"/>
+
 
     </android.widget.LinearLayout>
 
