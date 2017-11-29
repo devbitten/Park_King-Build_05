@@ -133,17 +133,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 pmd.setLatlng(new LatLng(31.8018, -85.9554));
                 pmd.setAddress("205 S Franklin Dr\n36081\nTroy\nAlabama");  //TODO update address
                 break;
-            case 4: pmd.setId(111115);  //TODO fill in, with DEMO: = reserved now!
-                pmd.setAvailable(false);
-                pmd.setTimeTillAvailble(30);
-                pmd.setPrice(3);
-                pmd.setTimePerUse(60);
+            case 4: pmd.setId(111115);  //Troy Utilities Department
+                pmd.setAvailable(false);    //TODO: make sure this reflects the actual availability
+                pmd.setTimeTillAvailble(28);
+                pmd.setPrice(2.5);
+                pmd.setTimePerUse(29);
                 pmd.setTimeLastUsed(
                     (String)new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss")
                         .format(new Date()));    //DEMO: RESERVED JUST NOW
                 pmd.setTimePerLastUsed(30);
-                pmd.setLatlng(new LatLng(31.6018, -85.6554));
-                pmd.setAddress("205 S Franklin Dr\n36081\nTroy\nAlabama");  //TODO update address
+                pmd.setLatlng(new LatLng(31.8100,-85.9692));
+                pmd.setAddress("306 E Academy St\n36081\nTroy\nAlabama");  //TODO update address
                 break;
         }
         return pmd;
